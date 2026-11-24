@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ER WatchCare | ระบบติดตามผู้ป่วยฉุกเฉิน</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anuphan:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#f4f7f8;--card:#fff;--ink:#22313a;--muted:#71808a;--line:#e7edef;--primary:#327d7a;--primary-soft:#e5f2f0;--orange:#d98b45;--red:#c85d62;--blue:#5278a8;--green:#64ad8d;--shadow:0 12px 34px rgba(39,67,75,.08)}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Anuphan,system-ui,sans-serif;font-size:15px}button,input,select{font:inherit}button{cursor:pointer;border:0}.app{display:flex;min-height:100vh}.sidebar{width:246px;background:#eef5f4;border-right:1px solid #dde9e7;padding:25px 16px;display:flex;flex-direction:column}.brand{display:flex;align-items:center;gap:11px;padding:0 10px 30px}.brand-mark{width:39px;height:39px;border-radius:13px;background:var(--primary);color:#fff;display:grid;place-items:center;font-weight:700;font-size:20px;box-shadow:0 6px 14px rgba(50,125,122,.2)}.brand strong{display:block;font-size:17px}.brand small{color:var(--muted);font-size:11px}.nav-label{color:#9aa8aa;font-size:11px;padding:0 12px;margin:4px 0 9px;text-transform:uppercase;letter-spacing:.08em}.nav button{display:flex;width:100%;align-items:center;gap:12px;padding:12px;border-radius:11px;color:#5e7074;background:transparent;text-align:left;margin:3px 0}.nav button.active,.nav button:hover{background:#dcecea;color:#246966}.nav-icon{font-size:18px;width:22px;text-align:center}.sidebar-footer{margin-top:auto;background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px;font-size:12px;color:var(--muted)}.status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#64ad8d;margin-right:6px}.main{flex:1;min-width:0;padding:25px 34px}.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.eyebrow{font-size:12px;color:var(--muted);margin-bottom:3px}.topbar h1{font-size:25px;margin:0;font-weight:700}.actions{display:flex;gap:10px;align-items:center}.date-chip{color:var(--muted);background:#fff;border:1px solid var(--line);padding:9px 13px;border-radius:10px}.primary{background:var(--primary);color:#fff;padding:10px 16px;border-radius:10px;box-shadow:0 5px 12px rgba(50,125,122,.17)}.primary:hover{background:#286b68}.outline{color:var(--primary);background:transparent;border:1px solid #c5dfdc;padding:9px 14px;border-radius:9px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:21px}.stat-card,.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}.stat-card{padding:18px}.stat-top{display:flex;justify-content:space-between;align-items:flex-start;color:var(--muted);font-size:13px}.stat-icon{width:35px;height:35px;border-radius:10px;display:grid;place-items:center;font-size:17px}.stat-value{font-size:28px;font-weight:700;margin:12px 0 2px}.stat-note{font-size:12px;color:var(--muted)}.green{background:#e2f1eb;color:#3e9276}.amber{background:#fff0df;color:#c57d35}.rose{background:#f9e8e9;color:#b65c65}.sky{background:#e9f0f9;color:#5278a8}.content-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(320px,.85fr);gap:20px}.panel{overflow:hidden}.panel-header{padding:19px 20px 14px;display:flex;justify-content:space-between;align-items:center;gap:10px}.panel-header h2{font-size:17px;margin:0}.panel-header p{font-size:12px;color:var(--muted);margin:4px 0 0}.search{display:flex;gap:8px;padding:0 20px 15px}.search input,.form-control{background:#fbfcfc;border:1px solid #dfe8e9;border-radius:9px;padding:10px 12px;outline:none;width:100%;color:var(--ink)}.search input:focus,.form-control:focus{border-color:#80b8b4;box-shadow:0 0 0 3px #e7f3f1}.filter{padding:10px 12px;border:1px solid #dfe8e9;border-radius:9px;color:var(--muted);background:#fff}.table-wrap{overflow:auto}.patients{width:100%;border-collapse:collapse;min-width:630px}.patients th{text-align:left;color:#91a0a2;font-size:11px;font-weight:500;background:#fafcfc;padding:10px 20px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.patients td{padding:14px 20px;border-bottom:1px solid #f0f3f3;font-size:13px}.patients tr:last-child td{border-bottom:0}.patient-name{font-weight:600}.patient-id{color:var(--muted);font-size:11px;margin-top:2px}.badge{display:inline-flex;padding:4px 9px;border-radius:20px;font-size:11px;white-space:nowrap}.critical{background:#fbe7e7;color:#b64f55}.urgent{background:#fff0dc;color:#b77329}.normal{background:#e6f2ed;color:#40866e}.waiting{background:#eaf0f7;color:#5278a8}.done{background:#eef0f1;color:#788386}.queue{list-style:none;margin:0;padding:0 20px 18px}.queue li{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #eff2f2}.queue li:last-child{border:0}.queue-number{width:29px;height:29px;border-radius:9px;background:var(--primary-soft);color:var(--primary);display:grid;place-items:center;font-weight:700;font-size:13px}.queue-info{flex:1}.queue-info strong{display:block;font-size:13px}.queue-info span{color:var(--muted);font-size:11px}.queue-time{color:var(--muted);font-size:11px}.empty{color:var(--muted);text-align:center;padding:28px}.modal-backdrop{position:fixed;inset:0;background:rgba(33,53,59,.32);display:grid;place-items:center;padding:20px;z-index:5}.modal{background:#fff;border-radius:18px;width:min(580px,100%);max-height:90vh;overflow:auto;box-shadow:0 22px 55px rgba(25,45,50,.2)}.modal-head{display:flex;justify-content:space-between;padding:21px 24px;border-bottom:1px solid var(--line)}.modal-head h2{margin:0;font-size:19px}.close{background:#f1f4f4;color:var(--muted);border-radius:8px;width:29px;height:29px;font-size:20px}.form{padding:20px 24px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field label{display:block;font-size:12px;color:#637477;margin:0 0 6px}.field.full{grid-column:1/-1}.form-footer{display:flex;justify-content:flex-end;gap:9px;margin-top:20px}.toast{position:fixed;right:25px;bottom:25px;background:#26494a;color:#fff;padding:12px 17px;border-radius:10px;box-shadow:var(--shadow);z-index:10}.hidden{display:none!important}.mini{padding:5px 11px;border-radius:8px;font-size:12px;background:var(--primary-soft);color:var(--primary)}.mini:hover{background:#d3e9e6}.form-error{color:var(--red);font-size:12px;margin:10px 0 0;min-height:16px}.primary:disabled{opacity:.6;cursor:wait}.admin-chip{background:#fbe7e7;color:#b64f55}
+    .source-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-bottom:18px;font-size:13px;color:var(--muted)}.source-bar strong{color:var(--ink);font-weight:600}.source-bar .spacer{flex:1}.source-bar.sheet{border-color:#c5dfdc;background:#f3faf9}.live-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#3e9276;margin-right:6px;animation:pulse 2s infinite}@keyframes pulse{50%{opacity:.35}}tr.flash td,li.flash{animation:flash 4s ease-out}@keyframes flash{0%,40%{background:#fff3c4}100%{background:transparent}}
+    .filters{display:flex;flex-wrap:wrap;gap:8px;padding:0 20px 15px}.filters .form-control,.filters .filter{flex:1 1 150px;width:auto}.count-label{font-size:12px;color:var(--muted)}
+    .hist-card{border:1px solid var(--line);border-radius:14px;margin:0 20px 16px;overflow:hidden}.hist-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 16px;background:#fafcfc;border-bottom:1px solid var(--line)}.hist-head strong{font-size:15px}.hist-head span{color:var(--muted);font-size:12px}.timeline{list-style:none;margin:0;padding:6px 16px 10px}.timeline li{display:grid;grid-template-columns:118px 1fr auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid #f0f3f3;font-size:13px}.timeline li:last-child{border:0}.t-date{color:var(--muted);font-size:12px}.t-badges{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+    .report-tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:0 20px 16px}.report-tools label{font-size:12px;color:var(--muted)}.report-tools .form-control{width:auto}.report-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:20px;margin-top:20px}.bar-row{display:grid;grid-template-columns:92px 1fr 34px;gap:10px;align-items:center;padding:6px 20px;font-size:12px}.bar-row .lbl{color:var(--muted)}.bar-row .num{text-align:right;font-weight:600}.bar{display:flex;height:14px;background:#f1f4f4;border-radius:7px;overflow:hidden}.seg-critical{background:var(--red)}.seg-urgent{background:var(--orange)}.seg-normal{background:var(--green)}.seg-waiting{background:var(--blue)}.seg-treating{background:var(--primary)}.seg-done{background:#a8b3b6}.legend{display:flex;gap:14px;flex-wrap:wrap;padding:0 20px 14px;font-size:12px;color:var(--muted)}.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}.rank{list-style:none;margin:0;padding:0 20px 18px}.rank li{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #f0f3f3;font-size:13px}.rank li:last-child{border:0}.chart-scroll{max-height:420px;overflow:auto;padding-bottom:12px}
+    .badge.l1{background:#d63a41;color:#fff}.badge.l2{background:#f08a24;color:#2b1600}.badge.l3{background:#ffd93b;color:#4a3b00}.badge.l4{background:#3fa66b;color:#fff}.badge.l5{background:#fff;color:#46555b;box-shadow:inset 0 0 0 1px #aebbbe}.badge.lx{background:#33434a;color:#fff}.seg-l1{background:#d63a41}.seg-l2{background:#f08a24}.seg-l3{background:#ffd93b}.seg-l4{background:#3fa66b}.seg-l5{background:#fff;box-shadow:inset 0 0 0 1px #8f9ea2}.seg-lx{background:#33434a}.level-stats{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}.form-control[readonly]{background:#eef2f2;color:var(--muted)}
+    .check-hint{font-size:12px;color:var(--muted);margin:6px 0 0}.check-tag{display:block;font-size:11px;color:var(--muted);margin-top:4px;white-space:nowrap}.check-tag.soon{color:#b77329;font-weight:600}.check-tag.due{color:#b64f55;font-weight:700}.alert-box{position:fixed;right:20px;top:20px;width:min(390px,calc(100% - 40px));max-height:70vh;overflow:auto;background:#fff;border:2px solid var(--red);border-radius:14px;box-shadow:0 18px 45px rgba(25,45,50,.25);z-index:4}.alert-head{display:flex;justify-content:space-between;align-items:center;gap:8px;background:#fbe7e7;color:#a5434a;padding:11px 14px;font-weight:700;position:sticky;top:0}.alert-item{padding:11px 14px;border-top:1px solid var(--line);font-size:13px}.alert-item .alert-btns{display:flex;gap:7px;margin-top:8px}
+    .panel-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}.import-preview{max-height:300px;overflow:auto;border:1px solid var(--line);border-radius:10px;margin-top:12px}.import-preview .patients{min-width:600px}.import-preview .patients td,.import-preview .patients th{padding:8px 10px}.row-bad td{background:#fdf0f0}.row-dup td{color:#9aa8aa}.import-summary{font-size:13px;margin-top:12px;display:flex;gap:8px;flex-wrap:wrap}.file-drop{display:block;border:2px dashed #c5dfdc;border-radius:12px;padding:22px;text-align:center;color:var(--muted);cursor:pointer;background:#fbfdfd;font-size:13px}.file-drop strong{color:var(--ink);font-size:15px}.file-drop:hover{background:var(--primary-soft)}.link-btn{background:none;color:var(--primary);padding:0;text-decoration:underline;font-size:13px}
+    @media(max-width:1000px){.sidebar{width:76px;padding:20px 10px}.brand{padding:0 8px 28px}.brand div:last-child,.nav-label,.nav button span:not(.nav-icon),.sidebar-footer{display:none}.nav button{justify-content:center}.main{padding:22px}.content-grid,.report-grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}}@media(max-width:600px){.main{padding:17px 12px}.topbar{align-items:flex-start;gap:14px;flex-wrap:wrap}.topbar h1{font-size:21px}.date-chip{display:none}.stats{gap:10px}.stat-card{padding:13px}.stat-value{font-size:23px}.content-grid{gap:13px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.actions .outline{display:none}.actions .admin-btn{display:inline-block;padding:9px 10px;font-size:13px}.timeline li{grid-template-columns:1fr;gap:6px}.t-badges{justify-content:flex-start}}
+  </style>
+</head>
+<body>
+  <div class="app"><aside class="sidebar"><div class="brand"><div class="brand-mark">+</div><div><strong>ER WatchCare</strong><small>Emergency Care System</small></div></div><div class="nav-label">เมนูหลัก</div><nav class="nav"><button data-view="overview" class="active" onclick="showView('overview')"><span class="nav-icon">⌂</span><span>ภาพรวม</span></button><button onclick="openModal()"><span class="nav-icon">＋</span><span>ลงทะเบียนผู้ป่วย</span></button><button data-view="patients" onclick="showView('patients')"><span class="nav-icon">▣</span><span>รายการผู้ป่วย</span></button><button data-view="history" onclick="showView('history')"><span class="nav-icon">◷</span><span>ประวัติการรักษา</span></button><button data-view="reports" onclick="showView('reports')"><span class="nav-icon">▥</span><span>รายงาน</span></button></nav><div class="sidebar-footer"><span class="status-dot"></span>ระบบพร้อมใช้งาน<br><span style="padding-left:14px" id="syncText">ข้อมูลในเครื่องนี้</span></div></aside>
+  <main class="main"><header class="topbar"><div><div class="eyebrow" id="todayText"></div><h1 id="pageTitle">ภาพรวมแผนกฉุกเฉิน</h1></div><div class="actions"><span class="badge admin-chip hidden" id="adminChip">● โหมดผู้ดูแล</span><span class="date-chip">● เวรเช้า 08:00–16:00</span><button class="outline admin-btn" id="adminBtn" onclick="adminButton()">🔒 ผู้ดูแลระบบ</button><button class="primary" onclick="openModal()">＋ ลงทะเบียนผู้ป่วย</button></div></header>
+  <div class="source-bar" id="sourceBar"></div>
+
+  <!-- ภาพรวม -->
+  <div class="view" id="view-overview"><section class="stats"><div class="stat-card"><div class="stat-top"><span>ผู้ป่วยวันนี้</span><span class="stat-icon green">♙</span></div><div class="stat-value" id="totalCount">0</div><div class="stat-note" id="totalNote">ลงทะเบียนวันนี้</div></div><div class="stat-card"><div class="stat-top"><span>รอคัดกรอง</span><span class="stat-icon amber">◷</span></div><div class="stat-value" id="waitingCount">0</div><div class="stat-note">ผู้ป่วยรอคัดกรองวันนี้</div></div><div class="stat-card"><div class="stat-top"><span>อยู่ระหว่างรักษา</span><span class="stat-icon rose">✚</span></div><div class="stat-value" id="treatingCount">0</div><div class="stat-note">ผู้ป่วยในห้องฉุกเฉิน</div></div><div class="stat-card"><div class="stat-top"><span>จำหน่ายแล้ว</span><span class="stat-icon sky">✓</span></div><div class="stat-value" id="doneCount">0</div><div class="stat-note">สถานะเสร็จสิ้นวันนี้</div></div></section><div class="content-grid"><section class="panel"><div class="panel-header"><div><h2>รายการผู้ป่วยล่าสุด</h2><p>ข้อมูลผู้ป่วยที่ลงทะเบียนในวันนี้</p></div><button class="outline" onclick="refreshData()">รีเฟรช</button></div><div class="search"><input id="searchInput" placeholder="ค้นหาชื่อ หรือเลข HN..." oninput="renderOverview()"><select class="filter" id="statusFilter" onchange="renderOverview()"><option value="all">ทุกสถานะ</option><option value="รอคัดกรอง">รอคัดกรอง</option><option value="กำลังรักษา">กำลังรักษา</option><option value="เสร็จสิ้น">เสร็จสิ้น</option></select></div><div class="table-wrap"><table class="patients"><thead><tr><th>ผู้ป่วย</th><th>เวลา</th><th>อาการสำคัญ</th><th>ระดับ</th><th>สถานะ</th><th class="admin-col hidden">จัดการ</th></tr></thead><tbody id="patientRows"></tbody></table></div></section><section class="panel"><div class="panel-header"><div><h2>คิวรอตรวจ</h2><p>เรียงตามระดับความเร่งด่วน</p></div><span class="badge waiting" id="queueLabel">0 ราย</span></div><ul class="queue" id="queueList"></ul></section></div></div>
+
+  <!-- รายการผู้ป่วย -->
+  <div class="view hidden" id="view-patients"><section class="panel"><div class="panel-header"><div><h2>รายการผู้ป่วยทั้งหมด</h2><p>ค้นหาและกรองข้อมูลผู้ป่วยทุกวัน</p></div><div class="panel-actions"><span class="count-label" id="pCount"></span><button class="outline" onclick="exportPatientsXlsx()">⇩ ส่งออก Excel</button><button class="primary" onclick="openImport()">⇪ นำเข้า Excel</button></div></div><div class="filters"><input class="form-control" id="pSearch" placeholder="ค้นหาชื่อ, HN หรืออาการ..." oninput="renderPatientsView()"><input class="form-control" type="date" id="pDate" onchange="renderPatientsView()" title="วันที่ลงทะเบียน"><select class="filter" id="pStatus" onchange="renderPatientsView()"><option value="all">ทุกสถานะ</option><option>รอคัดกรอง</option><option>กำลังรักษา</option><option>เสร็จสิ้น</option></select><select class="filter" id="pAcuity" onchange="renderPatientsView()"><option value="all">ทุกระดับ</option><option value="l1">1 แดง ฉุกเฉินวิกฤต</option><option value="l2">2 ส้ม ฉุกเฉินเร่งด่วน</option><option value="l3">3 เหลือง เร่งด่วน</option><option value="l4">4 เขียว เร่งด่วนน้อย</option><option value="l5">5 ขาว ไม่เร่งด่วน</option></select><button class="outline" onclick="clearPatientFilters()">ล้างตัวกรอง</button></div><div class="table-wrap"><table class="patients"><thead><tr><th>วันที่ / เวลา</th><th>ผู้ป่วย</th><th>อาการสำคัญ</th><th>ระดับ</th><th>สถานะ</th><th class="admin-col hidden">จัดการ</th></tr></thead><tbody id="pRows"></tbody></table></div></section></div>
+
+  <!-- ประวัติการรักษา -->
+  <div class="view hidden" id="view-history"><section class="panel"><div class="panel-header"><div><h2>ประวัติการรักษา</h2><p>ค้นหาด้วยเลข HN หรือชื่อ เพื่อดูการมารับบริการทุกครั้ง</p></div><span class="count-label" id="hCount"></span></div><div class="search"><input id="hSearch" placeholder="พิมพ์เลข HN หรือชื่อผู้ป่วย..." oninput="renderHistory()"></div><div id="hResults"></div></section></div>
+
+  <!-- รายงาน -->
+  <div class="view hidden" id="view-reports"><section class="panel"><div class="panel-header"><div><h2>รายงานสรุป</h2><p>สรุปจำนวนผู้ป่วยตามช่วงวันที่</p></div></div><div class="report-tools"><label for="rFrom">ตั้งแต่</label><input class="form-control" type="date" id="rFrom" onchange="renderReports()"><label for="rTo">ถึง</label><input class="form-control" type="date" id="rTo" onchange="renderReports()"><button class="outline" onclick="setRange(0)">วันนี้</button><button class="outline" onclick="setRange(6)">7 วัน</button><button class="outline" onclick="setRange(29)">30 วัน</button><button class="outline" onclick="exportCsv()">⇩ CSV</button><button class="primary" onclick="exportReportXlsx()">⇩ ส่งออก Excel</button></div></section>
+  <section class="stats level-stats" style="margin-top:20px" id="rCards"></section>
+  <div class="report-grid"><section class="panel"><div class="panel-header"><div><h2>ผู้ป่วยรายวัน</h2><p>แยกตามระดับความเร่งด่วน</p></div></div><div class="legend" id="rLegend"></div><div class="chart-scroll" id="rDaily"></div></section>
+  <div><section class="panel"><div class="panel-header"><div><h2>ตามสถานะ</h2><p>สถานะปัจจุบันของผู้ป่วยในช่วงที่เลือก</p></div></div><div id="rStatus" style="padding-bottom:14px"></div></section><section class="panel" style="margin-top:20px"><div class="panel-header"><div><h2>อาการสำคัญที่พบบ่อย</h2><p>5 อันดับแรก</p></div></div><ul class="rank" id="rSymptoms"></ul></section></div></div></div>
+  </main></div>
+
+  <div class="modal-backdrop hidden" id="modal"><div class="modal"><div class="modal-head"><h2 id="formTitle">ลงทะเบียนผู้ป่วยใหม่</h2><button class="close" onclick="closeModal()">×</button></div><form class="form" id="patientForm"><div class="form-grid"><div class="field"><label>ชื่อ–นามสกุล *</label><input class="form-control" name="name" required placeholder="เช่น สมชาย ใจดี"></div><div class="field"><label>เลข HN *</label><input class="form-control" name="hn" required placeholder="HN-0000"></div><div class="field"><label>อายุ (ปี)</label><input class="form-control" name="age" type="number" min="0" placeholder="35"></div><div class="field"><label>เพศ</label><select class="form-control" name="gender"><option>ไม่ระบุ</option><option>ชาย</option><option>หญิง</option></select></div><div class="field full"><label>อาการสำคัญ *</label><input class="form-control" name="symptom" required placeholder="ระบุอาการสำคัญที่มาโรงพยาบาล"></div><div class="field"><label>ระดับความเร่งด่วน</label><select class="form-control" name="acuity" required><option value="">— เลือกระดับ —</option><option value="l1">🔴 1 แดง ฉุกเฉินวิกฤต</option><option value="l2">🟠 2 ส้ม ฉุกเฉินเร่งด่วน</option><option value="l3">🟡 3 เหลือง เร่งด่วน</option><option value="l4">🟢 4 เขียว เร่งด่วนน้อย</option><option value="l5">⚪ 5 ขาว ไม่เร่งด่วน</option></select></div><div class="field"><label id="statusLabel">สถานะเริ่มต้น</label><select class="form-control" name="status"><option>รอคัดกรอง</option><option>กำลังรักษา</option></select></div><div class="field full"><label for="checkEvery">🔒 แจ้งเตือนให้เช็คผู้ป่วยทุก (ล็อกตามระดับความเร่งด่วน)</label><input class="form-control" id="checkEvery" type="text" readonly><p class="check-hint" id="checkHint"></p></div></div><div class="form-footer"><button type="button" class="outline" onclick="closeModal()">ยกเลิก</button><button class="primary" type="submit" id="submitBtn">บันทึกข้อมูล</button></div></form></div></div>
+  <div class="modal-backdrop hidden" id="loginModal"><div class="modal" style="width:min(400px,100%)"><div class="modal-head"><h2>เข้าสู่ระบบผู้ดูแล</h2><button class="close" type="button" onclick="closeLogin()">×</button></div><form class="form" id="loginForm"><div class="field"><label for="adminPassword">รหัสผ่านผู้ดูแลระบบ</label><input class="form-control" id="adminPassword" name="password" type="password" required autocomplete="current-password"></div><p class="form-error" id="loginError" role="alert"></p><div class="form-footer"><button type="button" class="outline" onclick="closeLogin()">ยกเลิก</button><button class="primary" type="submit" id="loginBtn">เข้าสู่ระบบ</button></div></form></div></div>
+  <div class="modal-backdrop hidden" id="importModal"><div class="modal" style="width:min(760px,100%)"><div class="modal-head"><h2>นำเข้าข้อมูลจาก Excel</h2><button class="close" type="button" onclick="closeImport()">×</button></div><div class="form"><label class="file-drop" for="importFile"><strong>⇪ คลิกเพื่อเลือกไฟล์ .xlsx, .xls หรือ .csv</strong><br><span id="importFileName"></span></label><input type="file" id="importFile" accept=".xlsx,.xls,.csv" class="hidden" onchange="readImportFile(this.files[0])"><p style="margin:10px 0 0;font-size:13px;color:var(--muted)">แถวแรกต้องเป็นหัวคอลัมน์ และต้องมีอย่างน้อย: ชื่อ–นามสกุล, เลข HN, อาการสำคัญ, ระดับความเร่งด่วน (1–5) · <button type="button" class="link-btn" onclick="downloadTemplate()">ดาวน์โหลดไฟล์ตัวอย่าง</button></p><div class="import-summary" id="importSummary"></div><div class="import-preview hidden" id="importPreview"></div><p class="form-error" id="importError"></p><div class="form-footer"><button type="button" class="outline" onclick="closeImport()">ยกเลิก</button><button type="button" class="primary" id="importBtn" disabled onclick="confirmImport()">นำเข้า</button></div></div></div></div>
+  <div class="alert-box hidden" id="alertBox" role="alert"><div class="alert-head"><span id="alertTitle"></span><button class="mini" type="button" id="muteBtn" onclick="toggleMute()">🔔 ปิดเสียง</button></div><div id="alertItems"></div></div>
+  <div id="toast" class="toast hidden"></div>
+  <script>
+const GAS_WEB_APP_URL='https://script.google.com/macros/s/AKfycbyHqGJiz273qEWz8SJMm5RGQJdAfgs06mvBUtbl2G6hOZPAjbLxMwZQeeYTIWumBuRT/exec';
+
+    const seed=[{name:'นางสาวกมลวรรณ สุขใจ',hn:'HN-02641',time:'10:42',symptom:'หายใจไม่สะดวก',acuity:'critical',acuityText:'ฉุกเฉินวิกฤต',status:'กำลังรักษา'},{name:'นายธนกร พรหมดี',hn:'HN-02640',time:'10:35',symptom:'อุบัติเหตุรถจักรยานยนต์',acuity:'urgent',acuityText:'เร่งด่วน',status:'รอคัดกรอง'},{name:'นางสมศรี แซ่ตั้ง',hn:'HN-02639',time:'10:18',symptom:'ปวดท้องรุนแรง',acuity:'urgent',acuityText:'เร่งด่วน',status:'กำลังรักษา'},{name:'เด็กชายภูริณัฐ แก้วใส',hn:'HN-02638',time:'09:56',symptom:'มีไข้สูง',acuity:'normal',acuityText:'ไม่เร่งด่วน',status:'รอคัดกรอง'},{name:'นายประเสริฐ มีสุข',hn:'HN-02637',time:'09:40',symptom:'แผลถลอกที่แขน',acuity:'normal',acuityText:'ไม่เร่งด่วน',status:'เสร็จสิ้น'}];
+    /* ระดับคัดแยก 5 ระดับ และรอบเตือน (นาที) ที่ล็อกไว้ — ต้องตรงกับ ACUITY_KEYS / CHECK_MIN ใน Code.gs */
+    const TRIAGE=[['l1','1 แดง ฉุกเฉินวิกฤต',5],['l2','2 ส้ม ฉุกเฉินเร่งด่วน',15],['l3','3 เหลือง เร่งด่วน',30],['l4','4 เขียว เร่งด่วนน้อย',120],['l5','5 ขาว ไม่เร่งด่วน',180]];
+    const ACUITY_TEXT={lx:'ไม่ทราบระดับ'},ACUITY_RANK={lx:-1},CHECK_MIN={};
+    TRIAGE.forEach((t,i)=>{ACUITY_TEXT[t[0]]=t[1];ACUITY_RANK[t[0]]=i;CHECK_MIN[t[0]]=t[2]});
+    /* แปลงข้อมูล 3 ระดับเดิมตามชื่อ: วิกฤต→1, เร่งด่วน→3, ไม่เร่งด่วน→5 */
+    function fixAcuity(r){
+      const k=ACUITY_RANK[r.acuity]>=0?r.acuity:(toAcuity(r.acuityText||r.acuity)||'lx');
+      r.acuity=k;if(k!=='lx')r.acuityText=ACUITY_TEXT[k];else r.acuityText=r.acuityText||ACUITY_TEXT.lx;
+      r.checkEvery=CHECK_MIN[k]||0;return r;
+    }
+    const STATUSES=['รอคัดกรอง','กำลังรักษา','เสร็จสิ้น'];
+    const TOKEN_KEY='erwatchcare-admin-token';
+    const VIEW_TITLES={overview:'ภาพรวมแผนกฉุกเฉิน',patients:'รายการผู้ป่วย',history:'ประวัติการรักษา',reports:'รายงาน'};
+    const $=id=>document.getElementById(id);
+
+    function pad(n){return String(n).padStart(2,'0')}
+    function isoDate(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())}
+    function todayISO(){return isoDate(new Date())}
+    function addDays(iso,n){const d=new Date(iso+'T00:00:00');d.setDate(d.getDate()+n);return isoDate(d)}
+    function thDate(iso){if(!/^\d{4}-\d{2}-\d{2}$/.test(iso||''))return iso||'-';return new Date(iso+'T00:00:00').toLocaleDateString('th-TH',{day:'numeric',month:'short',year:'2-digit'})}
+    function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+    function statusClass(s){return s==='รอคัดกรอง'?'waiting':s==='เสร็จสิ้น'?'done':'normal'}
+    function pct(n,t){return t?Math.round(n*100/t)+'%':'0%'}
+
+    let patients=seed;try{patients=JSON.parse(localStorage.getItem('erwatchcare-patients')||'null')||seed}catch(_){}
+    patients.forEach(p=>{if(!p.date)p.date=todayISO();fixAcuity(p)});
+    let adminToken=null;try{adminToken=sessionStorage.getItem(TOKEN_KEY)}catch(_){}
+    let sheetRows=null, sheetLoadedAt=null, sheetLoading=false, editTarget=null, currentView='overview', sheetStamp=null, flashIds=new Set(), pollTimer=null;
+    const POLL_MS=10000;
+
+    function isAdmin(){return !!adminToken}
+    function savePatients(){try{localStorage.setItem('erwatchcare-patients',JSON.stringify(patients))}catch(_){}}
+    function setToken(t){adminToken=t;try{t?sessionStorage.setItem(TOKEN_KEY,t):sessionStorage.removeItem(TOKEN_KEY)}catch(_){}}
+
+    /* เรียกฟังก์ชันฝั่ง Apps Script: ใช้ google.script.run เมื่อเปิดผ่าน Web app, ใช้ fetch เมื่อเปิดไฟล์ HTML ตรง ๆ */
+    function callServer(action,args){
+      if(window.google&&google.script&&google.script.run){
+        return new Promise((resolve,reject)=>{google.script.run.withSuccessHandler(resolve).withFailureHandler(reject)[action](...args)});
+      }
+      return fetch(GAS_WEB_APP_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action,args})}).then(r=>r.json());
+    }
+
+    /* ---------- แหล่งข้อมูล ---------- */
+    function allRows(){
+      if(sheetRows)return sheetRows;
+      patients.forEach((p,i)=>{p._id='L'+i});
+      return patients;
+    }
+    function findRec(id){return allRows().find(r=>r._id===id)}
+    const SIG_KEYS=['date','time','name','hn','age','gender','symptom','acuityText','status'];
+    function sig(r){return SIG_KEYS.map(k=>r[k]).join('|')}
+    async function loadSheet(quiet){
+      if(!isAdmin()||sheetLoading)return;
+      sheetLoading=true;if(quiet!==true)renderSourceBar();
+      let res;try{res=await callServer('listPatients',[adminToken])}catch(_){res={ok:false,error:'network'}}
+      sheetLoading=false;
+      if(res&&res.error==='unauthorized'){expireSession();return}
+      if(res&&res.ok){
+        const before=sheetRows?new Map(sheetRows.filter(r=>r.row).map(r=>[r.row,sig(r)])):null;
+        sheetRows=res.patients.map(r=>fixAcuity(Object.assign(r,{_id:'S'+r.row}))).sort((a,b)=>b.row-a.row);
+        sheetLoadedAt=new Date();sheetStamp=res.stamp||null;flashIds=new Set();
+        if(before){
+          sheetRows.forEach(r=>{if(before.get(r.row)!==sig(r))flashIds.add(r._id)});
+          if(quiet===true&&flashIds.size)toast('มีข้อมูลอัปเดตจาก Google Sheet '+flashIds.size+' รายการ');
+          setTimeout(()=>{flashIds=new Set()},4000);
+        }
+      }else if(quiet!==true)toast('ดึงข้อมูลจาก Google Sheet ไม่สำเร็จ');
+      renderAll();
+      startPolling();
+    }
+    /* ตรวจการเปลี่ยนแปลงใน Google Sheet ทุก POLL_MS มิลลิวินาที — ถ้ามีการเปลี่ยนแปลงจึงดึงข้อมูลใหม่ */
+    function startPolling(){if(!pollTimer)pollTimer=setInterval(pollChanges,POLL_MS)}
+    function stopPolling(){clearInterval(pollTimer);pollTimer=null}
+    async function pollChanges(){
+      if(!isAdmin()||!sheetRows){stopPolling();return}
+      if(sheetLoading||document.visibilityState!=='visible'||editTarget)return;
+      let res;try{res=await callServer('getChangeStamp',[adminToken])}catch(_){return}
+      if(res&&res.error==='unauthorized'){expireSession();return}
+      if(!(res&&res.ok))return;
+      if(res.stamp!==sheetStamp)loadSheet(true);
+      else{sheetLoadedAt=new Date();renderSourceBar()}
+    }
+    document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='visible'&&sheetRows)pollChanges()});
+    function refreshData(){isAdmin()?loadSheet():renderAll()}
+    function expireSession(){stopPolling();setToken(null);sheetRows=null;closeModal();renderAll();toast('เซสชันผู้ดูแลหมดอายุ กรุณาเข้าสู่ระบบใหม่');openLogin()}
+
+    function renderSourceBar(){
+      const bar=$('sourceBar');
+      if(sheetLoading){bar.className='source-bar';bar.innerHTML='<span>⟳ กำลังดึงข้อมูลจาก Google Sheet...</span>';return}
+      if(sheetRows){
+        const t=sheetLoadedAt.toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'});
+        bar.className='source-bar sheet';
+        bar.innerHTML=`<span><span class="live-dot"></span><strong>ข้อมูลสดจาก Google Sheet (ER Watch Care)</strong> · ${sheetRows.length} รายการ · อัปเดตอัตโนมัติทุก ${POLL_MS/1000} วินาที · ตรวจล่าสุด ${t} น.</span><span class="spacer"></span><button class="mini" onclick="loadSheet()">รีเฟรช</button>`;
+        $('syncText').textContent='ซิงก์ล่าสุด '+t+' น.';
+      }else{
+        bar.className='source-bar';
+        bar.innerHTML='<span>แสดง<strong>ข้อมูลในเครื่องนี้</strong>เท่านั้น — เข้าสู่ระบบผู้ดูแลเพื่อดูข้อมูลทั้งหมดจาก Google Sheet</span><span class="spacer"></span><button class="mini" onclick="openLogin()">🔒 เข้าสู่ระบบ</button>';
+        $('syncText').textContent='ข้อมูลในเครื่องนี้';
+      }
+    }
+
+    function fl(r){return flashIds.has(r._id)?' class="flash"':''}
+    function editCell(r){return isAdmin()?`<td><button class="mini" onclick="openEdit('${r._id}')">✎ แก้ไข</button></td>`:''}
+    function patientCell(r){return `<div class="patient-name">${esc(r.name)}</div><div class="patient-id">${esc(r.hn)}${r.age?' · '+esc(r.age)+' ปี':''}${r.gender&&r.gender!=='ไม่ระบุ'?' · '+esc(r.gender):''}</div>`}
+    function badges(r){return `<span class="badge ${esc(r.acuity)}">${esc(r.acuityText)}</span>`}
+    function statusBadge(r){return `<span class="badge ${statusClass(r.status)}">${esc(r.status)}</span>${checkTag(r)}`}
+
+    /* ---------- แจ้งเตือนเช็คผู้ป่วย ---------- */
+    const SOON_MS=5*60000, BEEP_MS=30000, SNOOZE_MIN=5;
+    let muted=false, lastBeep=0, alertKey='', audioCtx=null;
+    const PAGE_TITLE=document.title, ackBusy=new Set();
+    function hasCheck(r){return Number(r.nextCheck)>0&&r.status!=='เสร็จสิ้น'}
+    function hhmm(ms){const d=new Date(ms);return (isoDate(d)===todayISO()?'':thDate(isoDate(d))+' ')+pad(d.getHours())+':'+pad(d.getMinutes())}
+    function checkInfo(ms){const left=ms-Date.now();return left<=0?['due','⏰ ถึงเวลาเช็ค (เกิน '+Math.floor(-left/60000)+' นาที)']:[left<=SOON_MS?'soon':'','เช็ค '+hhmm(ms)+' (อีก '+Math.ceil(left/60000)+' นาที)']}
+    function checkTag(r){if(!hasCheck(r))return '';const c=checkInfo(Number(r.nextCheck));return `<span class="check-tag ${c[0]}" data-next="${Number(r.nextCheck)}">${c[1]}</span>`}
+    function updateCheckHint(){
+      const E=$('patientForm').elements,a=E['acuity'].value,n=CHECK_MIN[a]||0,c=checkData(a,E['status'].value);
+      $('checkEvery').value=n?n+' นาที':'— เลือกระดับก่อน —';
+      $('checkHint').textContent=c.nextCheck?'แจ้งเตือนครั้งถัดไปเวลา '+hhmm(c.nextCheck)+' น.':(n?'สถานะเสร็จสิ้น — ไม่มีการแจ้งเตือน':'');
+    }
+    function checkData(acuity,status){
+      const n=CHECK_MIN[acuity]||0,latest=Date.now()+n*60000;
+      if(!n||status==='เสร็จสิ้น')return {checkEvery:n,nextCheck:0};
+      const keep=editTarget&&hasCheck(editTarget)&&editTarget.acuity===acuity&&Number(editTarget.nextCheck)<=latest;
+      return {checkEvery:n,nextCheck:keep?Number(editTarget.nextCheck):latest};
+    }
+    function unlockAudio(){try{audioCtx=audioCtx||new (window.AudioContext||window.webkitAudioContext)();if(audioCtx.state==='suspended')audioCtx.resume()}catch(_){}}
+    document.addEventListener('pointerdown',unlockAudio);document.addEventListener('keydown',unlockAudio);
+    function beep(){
+      if(!audioCtx||audioCtx.state!=='running')return;
+      [0,.3,.6].forEach(t=>{const o=audioCtx.createOscillator(),g=audioCtx.createGain(),s=audioCtx.currentTime+t;o.frequency.value=880;g.gain.value=.15;o.connect(g);g.connect(audioCtx.destination);o.start(s);o.stop(s+.18)});
+    }
+    function toggleMute(){muted=!muted;$('muteBtn').textContent=muted?'🔕 เปิดเสียง':'🔔 ปิดเสียง'}
+    function dueRows(){const now=Date.now();return allRows().filter(r=>hasCheck(r)&&Number(r.nextCheck)<=now).sort((a,b)=>(ACUITY_RANK[a.acuity]-ACUITY_RANK[b.acuity])||(a.nextCheck-b.nextCheck))}
+    function tickAlerts(){
+      document.querySelectorAll('[data-next]').forEach(el=>{const c=checkInfo(Number(el.dataset.next));el.className='check-tag '+c[0];el.textContent=c[1]});
+      const due=dueRows();
+      $('alertBox').classList.toggle('hidden',!due.length);
+      document.title=due.length?'⏰ ('+due.length+') ถึงเวลาเช็คผู้ป่วย':PAGE_TITLE;
+      if(!due.length){alertKey='';$('alertItems').innerHTML='';return}
+      $('alertTitle').textContent='⏰ ถึงเวลาเช็คผู้ป่วย '+due.length+' ราย';
+      $('alertItems').innerHTML=due.map(r=>`<div class="alert-item"><strong>${esc(r.name)}</strong> ${badges(r)}<div class="patient-id">${esc(r.hn)} · ${esc(r.symptom)}</div>${checkTag(r)}<div class="alert-btns"><button class="mini" type="button" ${ackBusy.has(r._id)?'disabled':''} onclick="ackAlert('${r._id}',0)">✓ เช็คแล้ว</button><button class="mini" type="button" ${ackBusy.has(r._id)?'disabled':''} onclick="ackAlert('${r._id}',${SNOOZE_MIN})">เลื่อน ${SNOOZE_MIN} นาที</button></div></div>`).join('');
+      const key=due.map(r=>r._id+':'+r.nextCheck).sort().join(','),isNew=key.split(',').some(k=>!alertKey.split(',').includes(k));
+      alertKey=key;
+      if(!muted&&(isNew||Date.now()-lastBeep>=BEEP_MS)){lastBeep=Date.now();beep()}
+    }
+    async function ackAlert(id,snooze){
+      const r=findRec(id);if(!r||ackBusy.has(id))return;
+      let next=Date.now()+(snooze||CHECK_MIN[r.acuity]||SNOOZE_MIN)*60000;
+      ackBusy.add(id);tickAlerts();
+      let ok=true;
+      if(isAdmin()&&sheetRows){
+        let res;try{res=await callServer('ackCheck',[adminToken,r.hn,r.row||null,snooze?1:0])}catch(_){res=null}
+        if(res&&res.error==='unauthorized'){ackBusy.delete(id);expireSession();return}
+        ok=!!(res&&res.ok);if(ok&&res.nextCheck)next=res.nextCheck;
+      }
+      ackBusy.delete(id);
+      if(!ok){tickAlerts();toast('บันทึกการเช็คไม่สำเร็จ กรุณาลองใหม่');return}
+      const cur=findRec(id);(cur&&cur.hn===r.hn?cur:r).nextCheck=next;
+      if(!sheetRows)savePatients();
+      renderAll();tickAlerts();
+      toast((snooze?'เลื่อนแจ้งเตือน ':'บันทึกว่าเช็คแล้ว ')+r.name+' — ครั้งถัดไป '+hhmm(next)+' น.');
+    }
+
+    /* ---------- ภาพรวม ---------- */
+    function renderOverview(){
+      const today=todayISO(),rows=allRows(),todays=rows.filter(r=>r.date===today);
+      const q=($('searchInput').value||'').toLowerCase(),f=$('statusFilter').value,admin=isAdmin();
+      const shown=todays.filter(p=>(p.name+p.hn+p.symptom).toLowerCase().includes(q)&&(f==='all'||p.status===f));
+      $('patientRows').innerHTML=shown.length?shown.map(r=>`<tr${fl(r)}><td>${patientCell(r)}</td><td>${esc(r.time)}</td><td>${esc(r.symptom)}</td><td>${badges(r)}</td><td>${statusBadge(r)}</td>${editCell(r)}</tr>`).join(''):`<tr><td colspan="${admin?6:5}" class="empty">ไม่พบข้อมูลผู้ป่วยวันนี้</td></tr>`;
+      const waiting=todays.filter(p=>p.status==='รอคัดกรอง').sort((a,b)=>(ACUITY_RANK[a.acuity]-ACUITY_RANK[b.acuity])||String(a.time).localeCompare(String(b.time)));
+      $('totalCount').textContent=todays.length;
+      $('waitingCount').textContent=waiting.length;
+      $('treatingCount').textContent=todays.filter(p=>p.status==='กำลังรักษา').length;
+      $('doneCount').textContent=todays.filter(p=>p.status==='เสร็จสิ้น').length;
+      $('totalNote').textContent=sheetRows?'เมื่อวาน '+rows.filter(r=>r.date===addDays(today,-1)).length+' ราย':'ลงทะเบียนวันนี้';
+      $('queueLabel').textContent=waiting.length+' ราย';
+      $('queueList').innerHTML=waiting.length?waiting.slice(0,6).map((p,i)=>`<li><div class="queue-number">${i+1}</div><div class="queue-info"><strong>${esc(p.name)}</strong><span>${esc(p.hn)} · ${esc(p.symptom)}</span></div><span class="badge ${esc(p.acuity)}">${esc(p.acuityText)}</span><div class="queue-time">${esc(p.time)} น.</div></li>`).join(''):'<li class="empty">ไม่มีผู้ป่วยรอตรวจ</li>';
+    }
+
+    /* ---------- รายการผู้ป่วย ---------- */
+    function patientsFiltered(){
+      const q=($('pSearch').value||'').toLowerCase(),d=$('pDate').value,s=$('pStatus').value,a=$('pAcuity').value;
+      return allRows().filter(r=>(r.name+r.hn+r.symptom).toLowerCase().includes(q)&&(!d||r.date===d)&&(s==='all'||r.status===s)&&(a==='all'||r.acuity===a));
+    }
+    function renderPatientsView(){
+      const admin=isAdmin(),rows=patientsFiltered();
+      $('pCount').textContent=rows.length+' รายการ';
+      const limit=300;
+      $('pRows').innerHTML=rows.length?rows.slice(0,limit).map(r=>`<tr${fl(r)}><td><div>${esc(thDate(r.date))}</div><div class="patient-id">${esc(r.time)} น.</div></td><td>${patientCell(r)}</td><td>${esc(r.symptom)}</td><td>${badges(r)}</td><td>${statusBadge(r)}</td>${editCell(r)}</tr>`).join('')+(rows.length>limit?`<tr><td colspan="${admin?6:5}" class="empty">แสดง ${limit} รายการแรก — ใช้ตัวกรองเพื่อค้นหาเพิ่มเติม</td></tr>`:''):`<tr><td colspan="${admin?6:5}" class="empty">ไม่พบข้อมูลผู้ป่วย</td></tr>`;
+    }
+    function clearPatientFilters(){$('pSearch').value='';$('pDate').value='';$('pStatus').value='all';$('pAcuity').value='all';renderPatientsView()}
+
+    /* ---------- ประวัติการรักษา ---------- */
+    function renderHistory(){
+      const q=($('hSearch').value||'').trim().toLowerCase();
+      if(!q){$('hCount').textContent='';$('hResults').innerHTML='<p class="empty">พิมพ์เลข HN หรือชื่อผู้ป่วยเพื่อดูประวัติ</p>';return}
+      const groups=new Map();
+      allRows().filter(r=>(r.name+' '+r.hn).toLowerCase().includes(q)).forEach(r=>{const k=String(r.hn).trim()||r.name;if(!groups.has(k))groups.set(k,[]);groups.get(k).push(r)});
+      const list=[...groups.values()].map(v=>v.slice().sort((a,b)=>(String(b.date)+b.time).localeCompare(String(a.date)+a.time)));
+      $('hCount').textContent=list.length+' ราย';
+      $('hResults').innerHTML=list.length?list.slice(0,20).map(v=>{const p=v[0];return `<div class="hist-card"><div class="hist-head"><div><strong>${esc(p.name)}</strong><br><span>${esc(p.hn)}${p.age?' · อายุ '+esc(p.age)+' ปี':''}${p.gender&&p.gender!=='ไม่ระบุ'?' · '+esc(p.gender):''}</span></div><span class="badge waiting">มารับบริการ ${v.length} ครั้ง</span></div><ul class="timeline">${v.map(r=>`<li${fl(r)}><div class="t-date">${esc(thDate(r.date))}<br>${esc(r.time)} น.</div><div>${esc(r.symptom)}${r.updated?`<div class="patient-id">อัปเดตล่าสุด ${esc(r.updated)}</div>`:''}</div><div class="t-badges">${badges(r)}${statusBadge(r)}${isAdmin()?`<button class="mini" onclick="openEdit('${r._id}')">✎</button>`:''}</div></li>`).join('')}</ul></div>`}).join(''):'<p class="empty">ไม่พบประวัติผู้ป่วย</p>';
+    }
+
+    /* ---------- รายงาน ---------- */
+    function setRange(days){const t=todayISO();$('rFrom').value=addDays(t,-days);$('rTo').value=t;renderReports()}
+    function reportRows(){let f=$('rFrom').value,t=$('rTo').value;if(f&&t&&f>t){const x=f;f=t;t=x}return allRows().filter(r=>(!f||r.date>=f)&&(!t||r.date<=t))}
+    function barRow(label,segs,total,max){return `<div class="bar-row"><span class="lbl">${esc(label)}</span><div class="bar">${segs.filter(s=>s[1]>0).map(s=>`<span class="seg-${s[0]}" style="width:${max?s[1]*100/max:0}%" title="${s[1]}"></span>`).join('')}</div><span class="num">${total}</span></div>`}
+    function renderReports(){
+      const rows=reportRows(),n=rows.length,count=k=>rows.filter(r=>r.acuity===k).length;
+      const levels=TRIAGE.map(t=>t[0]).concat(count('lx')?['lx']:[]);
+      let f=$('rFrom').value||todayISO(),t=$('rTo').value||todayISO();if(f>t){const x=f;f=t;t=x}
+      const days=[];for(let d=t;d>=f&&days.length<92;d=addDays(d,-1))days.push(d);
+      const card=(head,val,note)=>`<div class="stat-card"><div class="stat-top">${head}</div><div class="stat-value">${val}</div><div class="stat-note">${note}</div></div>`;
+      $('rCards').innerHTML=card('<span>ผู้ป่วยทั้งหมด</span>',n,'เฉลี่ย '+(days.length?(n/days.length).toFixed(1):0)+' ราย/วัน')+levels.map(k=>card(`<span class="badge ${k}">${ACUITY_TEXT[k]}</span>`,count(k),pct(count(k),n)+' ของทั้งหมด')).join('');
+      $('rLegend').innerHTML=levels.map(k=>`<span><i class="seg-${k}"></i>${ACUITY_TEXT[k]}</span>`).join('');
+      const byDay=days.map(d=>{const r=rows.filter(x=>x.date===d);return [d,levels.map(k=>[k,r.filter(x=>x.acuity===k).length]),r.length]});
+      const max=Math.max(1,...byDay.map(x=>x[2]));
+      $('rDaily').innerHTML=byDay.length?byDay.map(x=>barRow(thDate(x[0]),x[1],x[2],max)).join(''):'<p class="empty">ไม่มีข้อมูล</p>';
+      const st=[['waiting','รอคัดกรอง'],['treating','กำลังรักษา'],['done','เสร็จสิ้น']].map(([k,l])=>[k,l,rows.filter(r=>r.status===l).length]);
+      const smax=Math.max(1,...st.map(x=>x[2]));
+      $('rStatus').innerHTML=st.map(x=>barRow(x[1],[[x[0],x[2]]],x[2],smax)).join('');
+      const sym=new Map();rows.forEach(r=>{const k=String(r.symptom||'').trim();if(k)sym.set(k,(sym.get(k)||0)+1)});
+      const top=[...sym.entries()].sort((a,b)=>b[1]-a[1]).slice(0,5);
+      $('rSymptoms').innerHTML=top.length?top.map(([k,v],i)=>`<li><span>${i+1}. ${esc(k)}</span><strong>${v} ราย</strong></li>`).join(''):'<li class="empty">ไม่มีข้อมูล</li>';
+    }
+    function exportCsv(){
+      const rows=reportRows();if(!rows.length){toast('ไม่มีข้อมูลในช่วงวันที่ที่เลือก');return}
+      const cell=v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"';
+      const head=['วันที่','เวลา','ชื่อ–นามสกุล','เลข HN','อายุ','เพศ','อาการสำคัญ','ระดับความเร่งด่วน','สถานะ','อัปเดตล่าสุด'];
+      const lines=[head.map(cell).join(',')].concat(rows.map(r=>[r.date,r.time,r.name,r.hn,r.age,r.gender,r.symptom,r.acuityText,r.status,r.updated].map(cell).join(',')));
+      const blob=new Blob([String.fromCharCode(0xFEFF)+lines.join('\r\n')],{type:'text/csv;charset=utf-8'});
+      const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='er-report-'+($('rFrom').value||'all')+'_'+($('rTo').value||'all')+'.csv';
+      document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);
+    }
+
+    /* ---------- Excel: ส่งออก / นำเข้า (ใช้ SheetJS โหลดเมื่อจำเป็น) ---------- */
+    const XLSX_URL='https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+    const EXPORT_HEAD=['วันที่','เวลา','ชื่อ–นามสกุล','เลข HN','อายุ','เพศ','อาการสำคัญ','ระดับความเร่งด่วน','สถานะ','อัปเดตล่าสุด'];
+    let xlsxPromise=null, importRows=[];
+    function loadXlsx(){
+      if(window.XLSX)return Promise.resolve(window.XLSX);
+      if(!xlsxPromise)xlsxPromise=new Promise((res,rej)=>{const s=document.createElement('script');s.src=XLSX_URL;s.onload=()=>res(window.XLSX);s.onerror=()=>{xlsxPromise=null;rej(new Error('load'))};document.head.appendChild(s)});
+      return xlsxPromise;
+    }
+    async function downloadXlsx(rows,filename,sheetName){
+      let X;try{X=await loadXlsx()}catch(_){toast('โหลดตัวสร้างไฟล์ Excel ไม่สำเร็จ ตรวจสอบอินเทอร์เน็ต');return}
+      const data=[EXPORT_HEAD].concat(rows.map(r=>[r.date,r.time,r.name,r.hn,(r.age===''||r.age==null)?'':(Number(r.age)||r.age),r.gender||'',r.symptom,r.acuityText,r.status,r.updated||'']));
+      const ws=X.utils.aoa_to_sheet(data);ws['!cols']=[12,8,26,12,6,8,30,16,12,18].map(w=>({wch:w}));
+      const wb=X.utils.book_new();X.utils.book_append_sheet(wb,ws,sheetName||'ผู้ป่วย');X.writeFile(wb,filename);
+    }
+    function exportPatientsXlsx(){const rows=patientsFiltered();if(!rows.length){toast('ไม่มีข้อมูลให้ส่งออก');return}downloadXlsx(rows,'er-patients-'+todayISO()+'.xlsx','รายการผู้ป่วย')}
+    function exportReportXlsx(){const rows=reportRows();if(!rows.length){toast('ไม่มีข้อมูลในช่วงวันที่ที่เลือก');return}downloadXlsx(rows,'er-report-'+($('rFrom').value||'all')+'_'+($('rTo').value||'all')+'.xlsx','รายงาน')}
+    function downloadTemplate(){downloadXlsx([{date:todayISO(),time:'08:30',name:'สมชาย ใจดี',hn:'HN-00001',age:35,gender:'ชาย',symptom:'ปวดศีรษะ',acuityText:ACUITY_TEXT.l4,status:'รอคัดกรอง',updated:''}],'er-import-template.xlsx','ผู้ป่วย')}
+
+    const COLS={date:['วันที่','วันที่ลงทะเบียน','date'],time:['เวลา','time'],name:['ชื่อ–นามสกุล','ชื่อ-นามสกุล','ชื่อ นามสกุล','ชื่อ','name'],hn:['เลข hn','hn'],age:['อายุ','age'],gender:['เพศ','gender','sex'],symptom:['อาการสำคัญ','อาการ','symptom','chiefcomplaint'],acuity:['ระดับความเร่งด่วน','ระดับ','acuity','triage'],status:['สถานะ','status']};
+    function normHead(h){return String(h==null?'':h).trim().toLowerCase().replace(/\s+/g,' ')}
+    function toISO(v){
+      if(typeof v==='number'&&v>20000){const d=new Date(Date.UTC(1899,11,30)+Math.floor(v)*864e5);return d.getUTCFullYear()+'-'+pad(d.getUTCMonth()+1)+'-'+pad(d.getUTCDate())}
+      const s=String(v==null?'':v).trim();if(!s)return '';
+      let m=s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/);if(m){let y=+m[1];if(y>2400)y-=543;return y+'-'+pad(m[2])+'-'+pad(m[3])}
+      m=s.match(/^(\d{1,2})[\/.-](\d{1,2})[\/.-](\d{2,4})$/);if(m){let y=+m[3];if(y<100)y+=2000;if(y>2400)y-=543;return y+'-'+pad(m[2])+'-'+pad(m[1])}
+      return null;
+    }
+    function toTime(v){
+      if(typeof v==='number'){const mins=Math.round((v%1)*1440);return pad(Math.floor(mins/60)%24)+':'+pad(mins%60)}
+      const s=String(v==null?'':v).trim();const m=s.match(/^(\d{1,2})[:.](\d{2})/);return m?pad(m[1])+':'+m[2]:s;
+    }
+    function toAcuity(v){const s=String(v==null?'':v).trim().toLowerCase(),m=s.match(/^(?:esi|level|ระดับ)?\s*([1-5])(?![0-9])/);
+      if(m)return 'l'+m[1];
+      if(/ไม่เร่ง|ขาว|white|non|normal/.test(s))return 'l5';
+      if(/กึ่ง|เร่งด่วนน้อย|เขียว|green|semi/.test(s))return 'l4';
+      if(/วิกฤต|แดง|^red|resus|critical|immediate/.test(s))return 'l1';
+      if(/ฉุกเฉิน|ส้ม|ชมพู|orange|pink|emergen/.test(s))return 'l2';
+      if(/เหลือง|yellow|เร่งด่วน|urgen/.test(s))return 'l3';
+      return '';
+    }
+    function toStatus(v){const s=String(v==null?'':v).trim();if(STATUSES.includes(s))return s;if(/เสร็จ|done|discharg/i.test(s))return 'เสร็จสิ้น';if(/รักษา|treat/i.test(s))return 'กำลังรักษา';return 'รอคัดกรอง'}
+
+    function openImport(){
+      if(!isAdmin()){toast('กรุณาเข้าสู่ระบบผู้ดูแลก่อนนำเข้าข้อมูล');openLogin();return}
+      importRows=[];$('importFile').value='';$('importFileName').textContent='ข้อมูลจะถูกเพิ่มต่อท้ายแท็บ ผู้ป่วยฉุกเฉิน ใน Google Sheet';
+      $('importSummary').innerHTML='';$('importPreview').classList.add('hidden');$('importError').textContent='';$('importBtn').disabled=true;$('importBtn').textContent='นำเข้า';
+      $('importModal').classList.remove('hidden');loadXlsx().catch(()=>{});
+    }
+    function closeImport(){$('importModal').classList.add('hidden');importRows=[]}
+    async function readImportFile(file){
+      if(!file)return;$('importFileName').textContent=file.name;$('importError').textContent='';
+      let X;try{X=await loadXlsx()}catch(_){$('importError').textContent='โหลดตัวอ่านไฟล์ Excel ไม่สำเร็จ ตรวจสอบอินเทอร์เน็ต';return}
+      try{
+        const wb=X.read(await file.arrayBuffer(),{type:'array'});
+        const aoa=X.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{header:1,raw:true,defval:''});
+        if(aoa.length<2)throw new Error('ไม่พบข้อมูลในไฟล์ (ต้องมีหัวคอลัมน์และข้อมูลอย่างน้อย 1 แถว)');
+        const head=aoa[0].map(normHead),idx={};
+        Object.entries(COLS).forEach(([k,names])=>{idx[k]=head.findIndex(h=>names.includes(h))});
+        const missing=['name','hn','symptom','acuity'].filter(k=>idx[k]<0);
+        if(missing.length)throw new Error('ไม่พบคอลัมน์ที่จำเป็น: '+missing.map(k=>COLS[k][0]).join(', '));
+        const existing=new Set((sheetRows||[]).map(r=>[r.hn,r.date,r.time].join('|')));
+        const get=(row,k)=>idx[k]>=0?row[idx[k]]:'';
+        importRows=aoa.slice(1).filter(row=>row.some(c=>String(c).trim()!=='')).map(row=>{
+          const acuity=toAcuity(get(row,'acuity'))||'lx',dateRaw=get(row,'date'),date=String(dateRaw).trim()===''?todayISO():toISO(dateRaw);
+          const r={date:date||'',time:toTime(get(row,'time')),name:String(get(row,'name')).trim(),hn:String(get(row,'hn')).trim(),age:String(get(row,'age')).trim(),gender:String(get(row,'gender')).trim()||'ไม่ระบุ',symptom:String(get(row,'symptom')).trim(),acuity,acuityText:ACUITY_TEXT[acuity],status:toStatus(get(row,'status'))};
+          r.error=(!r.name||!r.hn||!r.symptom)?'ข้อมูลไม่ครบ':(date===null?'วันที่ไม่ถูกต้อง':acuity==='lx'?'ไม่ทราบระดับความเร่งด่วน':'');
+          r.dup=!r.error&&existing.has([r.hn,r.date,r.time].join('|'));
+          return r;
+        });
+      }catch(err){importRows=[];$('importError').textContent='อ่านไฟล์ไม่สำเร็จ: '+err.message}
+      renderImportPreview();
+    }
+    function renderImportPreview(){
+      const ok=importRows.filter(r=>!r.error&&!r.dup),bad=importRows.filter(r=>r.error),dup=importRows.filter(r=>r.dup);
+      $('importSummary').innerHTML=importRows.length?`<span class="badge normal">พร้อมนำเข้า ${ok.length} แถว</span>${dup.length?`<span class="badge waiting">ซ้ำกับใน Sheet ${dup.length} แถว (ข้าม)</span>`:''}${bad.length?`<span class="badge critical">มีปัญหา ${bad.length} แถว (ข้าม)</span>`:''}`:'';
+      const p=$('importPreview');p.classList.toggle('hidden',!importRows.length);
+      p.innerHTML=importRows.length?`<table class="patients"><thead><tr><th>วันที่ / เวลา</th><th>ผู้ป่วย</th><th>อาการสำคัญ</th><th>ระดับ</th><th>สถานะ</th><th>หมายเหตุ</th></tr></thead><tbody>${importRows.slice(0,100).map(r=>`<tr class="${r.error?'row-bad':r.dup?'row-dup':''}"><td>${esc(thDate(r.date))}<div class="patient-id">${esc(r.time)}</div></td><td>${patientCell(r)}</td><td>${esc(r.symptom)}</td><td>${badges(r)}</td><td>${statusBadge(r)}</td><td>${esc(r.error||(r.dup?'ซ้ำ':''))}</td></tr>`).join('')}</tbody></table>${importRows.length>100?`<p class="empty">แสดง 100 แถวแรกจาก ${importRows.length} แถว</p>`:''}`:'';
+      $('importBtn').disabled=!ok.length;$('importBtn').textContent=ok.length?'นำเข้า '+ok.length+' แถว':'นำเข้า';
+    }
+    async function confirmImport(){
+      const rows=importRows.filter(r=>!r.error&&!r.dup).map(r=>({date:r.date,time:r.time,name:r.name,hn:r.hn,age:r.age,gender:r.gender,symptom:r.symptom,acuityText:r.acuityText,status:r.status}));
+      if(!rows.length||!isAdmin())return;
+      const btn=$('importBtn');btn.disabled=true;btn.textContent='กำลังนำเข้า...';
+      let res;try{res=await callServer('importPatients',[adminToken,rows])}catch(_){res={ok:false,error:'network'}}
+      if(res&&res.error==='unauthorized'){closeImport();expireSession();return}
+      if(res&&res.ok){closeImport();toast('นำเข้าข้อมูล '+res.added+' แถวเข้า Google Sheet แล้ว');loadSheet()}
+      else{btn.disabled=false;btn.textContent='นำเข้า '+rows.length+' แถว';$('importError').textContent=res&&res.error==='too_many'?'นำเข้าได้ครั้งละไม่เกิน 2,000 แถว':'นำเข้าไม่สำเร็จ กรุณาลองใหม่'}
+    }
+
+    /* ---------- การสลับหน้า ---------- */
+    function showView(v){
+      currentView=v;
+      document.querySelectorAll('.view').forEach(el=>el.classList.toggle('hidden',el.id!=='view-'+v));
+      document.querySelectorAll('.nav button[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===v));
+      $('pageTitle').textContent=VIEW_TITLES[v];
+      renderAll();
+      if(v==='history')setTimeout(()=>$('hSearch').focus(),30);
+    }
+    function renderAll(){
+      const admin=isAdmin();
+      document.querySelectorAll('.admin-col').forEach(el=>el.classList.toggle('hidden',!admin));
+      $('adminBtn').textContent=admin?'ออกจากระบบผู้ดูแล':'🔒 ผู้ดูแลระบบ';
+      $('adminChip').classList.toggle('hidden',!admin);
+      renderSourceBar();
+      if(currentView==='overview')renderOverview();
+      else if(currentView==='patients')renderPatientsView();
+      else if(currentView==='history')renderHistory();
+      else if(currentView==='reports')renderReports();
+    }
+
+    /* ---------- ฟอร์มลงทะเบียน / แก้ไข ---------- */
+    function fillStatusOptions(editing,current){const sel=$('patientForm').elements['status'];sel.innerHTML=(editing?STATUSES:STATUSES.slice(0,2)).map(s=>`<option>${s}</option>`).join('');if(current)sel.value=current}
+    function openModal(){editTarget=null;$('patientForm').reset();fillStatusOptions(false);$('formTitle').textContent='ลงทะเบียนผู้ป่วยใหม่';$('statusLabel').textContent='สถานะเริ่มต้น';$('submitBtn').textContent='บันทึกข้อมูล';updateCheckHint();$('modal').classList.remove('hidden')}
+    function openEdit(id){
+      if(!isAdmin()){openLogin();return}
+      const p=findRec(id);if(!p)return;editTarget=p;
+      const f=$('patientForm'),el=f.elements;f.reset();fillStatusOptions(true,p.status);
+      el['name'].value=p.name||'';el['hn'].value=p.hn||'';el['age'].value=p.age||'';el['gender'].value=p.gender||'ไม่ระบุ';el['symptom'].value=p.symptom||'';el['acuity'].value=CHECK_MIN[p.acuity]?p.acuity:'';
+      $('formTitle').textContent='แก้ไขข้อมูลผู้ป่วย';$('statusLabel').textContent='สถานะ';$('submitBtn').textContent='บันทึกการแก้ไข';
+      updateCheckHint();
+      $('modal').classList.remove('hidden');
+    }
+    function closeModal(){$('modal').classList.add('hidden');$('patientForm').reset();editTarget=null;$('submitBtn').disabled=false}
+    function toast(msg){const el=$('toast');el.textContent=msg;el.classList.remove('hidden');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.add('hidden'),3200)}
+
+    async function updateExisting(rec,data){
+      if(!isAdmin()){closeModal();openLogin();return}
+      const updated=Object.assign({},rec,data),btn=$('submitBtn');
+      btn.disabled=true;btn.textContent='กำลังบันทึก...';
+      let res;try{res=await callServer('updatePatient',[adminToken,rec.hn,updated,rec.row||null])}catch(_){res={ok:false,error:'network'}}
+      if(res&&res.error==='unauthorized'){expireSession();return}
+      if(rec.row&&!(res&&res.ok)){btn.disabled=false;btn.textContent='บันทึกการแก้ไข';toast(res&&res.error==='not_found'?'ไม่พบแถวนี้ใน Google Sheet — กดรีเฟรชแล้วลองใหม่':'อัปเดต Google Sheet ไม่สำเร็จ กรุณาลองใหม่');return}
+      Object.assign(rec,data);
+      if(!rec.row)savePatients();
+      closeModal();renderAll();
+      toast(res&&res.ok?'แก้ไขข้อมูลและอัปเดต Google Sheet แล้ว':res&&res.error==='not_found'?'แก้ไขในเครื่องแล้ว แต่ไม่พบ HN นี้ใน Google Sheet':'แก้ไขในเครื่องแล้ว แต่อัปเดต Google Sheet ไม่สำเร็จ');
+    }
+
+    $('patientForm').addEventListener('submit',e=>{
+      e.preventDefault();const d=new FormData(e.target),acuity=d.get('acuity');
+      const data={name:String(d.get('name')).trim(),hn:String(d.get('hn')).trim(),age:d.get('age'),gender:d.get('gender'),symptom:String(d.get('symptom')).trim(),acuity,acuityText:ACUITY_TEXT[acuity],status:d.get('status')};
+      Object.assign(data,checkData(acuity,data.status));
+      if(editTarget){updateExisting(editTarget,data);return}
+      const p=Object.assign({date:todayISO(),time:new Date().toLocaleTimeString('th-TH',{hour:'2-digit',minute:'2-digit'})},data);
+      patients.unshift(p);savePatients();
+      if(sheetRows)sheetRows.unshift(Object.assign({},p,{_id:'N'+Date.now()}));
+      closeModal();renderAll();toast('บันทึกข้อมูลผู้ป่วยเรียบร้อยแล้ว');
+      try{if(window.google&&google.script&&google.script.run){google.script.run.withFailureHandler(()=>{}).savePatient(p)}else{fetch(GAS_WEB_APP_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'savePatient',args:[p]})}).catch(()=>toast('ส่งข้อมูลเข้า Google Sheet ไม่สำเร็จ'))}}catch(_){}
+      if(sheetRows)setTimeout(loadSheet,2500);
+    });
+
+    /* ---------- ผู้ดูแลระบบ ---------- */
+    function adminButton(){isAdmin()?adminLogout():openLogin()}
+    function openLogin(){$('loginError').textContent='';$('loginModal').classList.remove('hidden');setTimeout(()=>$('adminPassword').focus(),50)}
+    function closeLogin(){$('loginModal').classList.add('hidden');$('loginForm').reset()}
+    function adminLogout(){stopPolling();const t=adminToken;setToken(null);sheetRows=null;renderAll();toast('ออกจากระบบผู้ดูแลแล้ว');if(t)callServer('adminLogout',[t]).catch(()=>{})}
+    $('loginForm').addEventListener('submit',async e=>{
+      e.preventDefault();const btn=$('loginBtn');btn.disabled=true;btn.textContent='กำลังตรวจสอบ...';$('loginError').textContent='';
+      try{
+        const res=await callServer('adminLogin',[$('adminPassword').value]);
+        if(res&&res.ok){setToken(res.token);closeLogin();renderAll();toast('เข้าสู่ระบบผู้ดูแลแล้ว');loadSheet()}
+        else $('loginError').textContent=res&&res.error==='no_password_set'?'ยังไม่ได้ตั้งรหัสผ่านผู้ดูแล (ADMIN_PASSWORD ใน Script properties)':'รหัสผ่านไม่ถูกต้อง';
+      }catch(_){$('loginError').textContent='เชื่อมต่อเซิร์ฟเวอร์ไม่ได้ กรุณาลองใหม่'}
+      finally{btn.disabled=false;btn.textContent='เข้าสู่ระบบ'}
+    });
+
+    $('todayText').textContent=new Date().toLocaleDateString('th-TH',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+    $('patientForm').elements['acuity'].addEventListener('change',updateCheckHint);
+    $('patientForm').elements['status'].addEventListener('change',updateCheckHint);
+    setRange(6);
+    showView('overview');
+    tickAlerts();setInterval(tickAlerts,5000);
+    if(isAdmin())loadSheet();
+  </script>
+</body>
+</html>
